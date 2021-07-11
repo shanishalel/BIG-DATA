@@ -6,13 +6,13 @@ const port = 3000
 
 //------------ kafka------------
 const kafka = require('./kafkaProduce');
+const kafka_consume = require('./kafkaConsume');
+
 const bodyParser = require('body-parser');
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-
 
 app.set('view engine', 'ejs');
 app.use(express.static("public"));

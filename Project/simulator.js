@@ -1,6 +1,5 @@
 const kafkaProduce=require('./kafkaProduce');
 
-
 /*
 every event will include : 
 type event(enter the road, enter section, exit the road and exit section)

@@ -2,6 +2,8 @@
 
 const uuid = require("uuid");
 const Kafka = require("node-rdkafka");
+const mongo=require('./mongo.js');
+
 
 const kafkaConf = {
   "group.id": "cloudkarafka-example",
@@ -36,8 +38,11 @@ consumer.on("ready", function(arg) {
 });
 
 consumer.on("data", function(m) {
- console.log(m.value.toString());
+  console.log(m.value.toString());
+  const tmp_json=JSON.parse(m.value.toString()); //cause the mongo gets json
+  mongo.CreateEvent(tmp_json);
 });
+
 consumer.on("disconnected", function(arg) {
   process.exit();
 });
