@@ -20,7 +20,9 @@ module.exports.DataMaker= function (kafka)
          * 2-enter section
          * 3-exit the road
          * 4-exit section**/
-        event.Type = Math.floor(Math.random() * 4) + 1;
+        let EventType=["Enter Road","Enter Section","Exit road","Exit Section"]
+        loc=Math.floor(Math.random() * 3) + 0;
+        event.Type = EventType[loc];
         //section id from 1 to 5
         event.Section = Math.floor(Math.random() * 5) + 1;
         //type of the car- private, truck, van 
