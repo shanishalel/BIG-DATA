@@ -1,4 +1,3 @@
-// https://www.cloudkarafka.com/ הפעלת קפקא במסגרת ספק זה
 
 const uuid = require("uuid");
 const Kafka = require("node-rdkafka");

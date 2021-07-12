@@ -9,7 +9,7 @@ day in the week
 time
 if it is a special day (hollyday)
 */
-module.exports.DataMaker= function (kafka) 
+module.exports.DataMaker= function () 
 {
     for (let i = 0; i < 10; i++)
     {

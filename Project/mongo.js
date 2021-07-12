@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://shani:shani206134033@cluster0.phy1b.mongodb.net/salesDb?retryWrites=true&w=majority";
+const uri = "mongodb+srv://shani:shani206134033@cluster0.phy1b.mongodb.net/Project?retryWrites=true&w=majority";
 
 // sumHelper = function (numbers) {
 //     let total = 0;

@@ -24,7 +24,7 @@ const genMessage = m => new Buffer.alloc(m.length,m);
 
 producer.on("ready", function(arg) {
   console.log(`producer Ariel is ready.`);
-  simulator.DataMaker(kafkaConf);
+  simulator.DataMaker();
 
 });
 producer.connect();
