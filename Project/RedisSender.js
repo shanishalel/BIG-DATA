@@ -6,24 +6,72 @@ var redisClient = redis.createClient();
 var sub = redis.createClient()
 
 // for explanations : https://www.sitepoint.com/using-redis-node-js/
-
+let section_1=0,section_2=0,section_3=0,section_4=0,section_5=0;
 
 var Db2 = {
+   
     InsertCar: function (m) {
-        const my_json=JSON.parse(m.value.toString());
-        my_type=my_json.Type;
-        if(my_type=="Enter Section" || my_type=="Enter road"){
-            my_section=my_json.Section;
+       
+        //redisClient.hmset('Cars',m);
+        // redisClient.sadd('cars',m, function (err, reply) {
+        //     console.log(reply);
+        // });
+       
+        mJson = JSON.parse(m);
+        if(mJson.Type=="Enter Road" || mJson.Type=="Enter Section"){
+            switch(mJson.Section){
+                case 1:
+                    section_1++;
+                    break;
+                case 2:
+                    section_2++;
+                    break;
+                case 3:
+                    section_3++;
+                    break;
+                case 4:
+                    section_4++;
+                    break;
+                case 5:
+                    section_5++;
+                    break;
+                default:
+            }
+            
+        
         }
-        if(my_type=="Exist Section" || my_type=="Exist road"){
-            my_section=my_json.Section;
+        /* at this point we can gets number<0 we should check it ans maybe 
+        change the simulator */
+        if(mJson.Type=="End Road" || mJson.Type=="Exit road"){
+            switch(mJson.Section){
+                case 1:
+                    section_1--;
+                    break;
+                case 2:
+                    section_2--;
+                    break;
+                case 3:
+                    section_3--;
+                    break;
+                case 4:
+                    section_4--;
+                    break;
+                case 5:
+                    section_5--;
+                    break;
+                default:
+            }
+   
         }
-     
-        // redisClient.hmset('Cars',m);
-        redisClient.sadd( 'cars',m, function (err, reply) {
+        redisClient.hmset('Sections', "section_1",section_1+"","section_2",section_2+"","section_3",section_3+"", "section_4",section_4+""
+        ,"section_5", section_5+"",function (err, reply) {
+                    console.log(reply);
+        });
+        redisClient.sadd('Cars',m,  function (err, reply) {
             console.log(reply);
         });
-        // redisClient.incr('NumberOfCars');
+
+    // redisClient.incr('NumberOfCars');
     }
 
 
