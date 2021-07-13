@@ -2,6 +2,7 @@
 const uuid = require("uuid");
 const Kafka = require("node-rdkafka");
 const mongo=require('./mongo.js');
+const redisSender=require('./RedisSender.js');
 
 
 const kafkaConf = {
@@ -40,6 +41,8 @@ consumer.on("data", function(m) {
   console.log(m.value.toString());
   const tmp_json=JSON.parse(m.value.toString()); //cause the mongo gets json
   mongo.CreateEvent(tmp_json);
+  redisSender.InsertCar(m.value.toString());
+
 });
 
 consumer.on("disconnected", function(arg) {
