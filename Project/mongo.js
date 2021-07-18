@@ -21,7 +21,7 @@ var Db = {
             var dbo = db.db("Project");
             dbo.collection("RoadDB").insertOne(m, function (err, res) {
                 if (err) throw err;
-                console.log("event has been inserted");
+                // console.log("event has been inserted");
                 db.close();
             });
         });

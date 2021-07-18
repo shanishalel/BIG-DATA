@@ -12,11 +12,6 @@ var Db2 = {
    
     InsertCar: function (m) {
        
-        //redisClient.hmset('Cars',m);
-        // redisClient.sadd('cars',m, function (err, reply) {
-        //     console.log(reply);
-        // });
-       
         mJson = JSON.parse(m);
         if(mJson.Type=="Enter Road" || mJson.Type=="Enter Section"){
             switch(mJson.Section){
@@ -70,57 +65,13 @@ var Db2 = {
         redisClient.sadd('Cars',m,  function (err, reply) {
             console.log(reply);
         });
+        //send the sections to reciver
+        let Sections=[section_1,section_2,section_3,section_4,section_5];
+        redisClient.publish("message",JSON.stringify(Sections),function(){
+            // console.log('published')
+        });
 
-    // redisClient.incr('NumberOfCars');
     }
-
-
-
-// app.get('/test', function (req, res) {
-
-//     // Store string  
-//     redisClient.set('NumberOfCars', "0", function (err, reply) {
-//         console.log(reply);
-//     });
-
-
-//     //Store and get Hash i.e. object( as keyvalue pairs)
-//     redisClient.hmset('Sections',"one", 'Sorek',"two", 'Nesharim',"three", 'BenShemen', "four",'nashonim',"five", 'kesem');
-//     redisClient.hgetall('Sections', function (err, object) {
-//         console.log(object);
-//     });
-
-    /*
-    also ok:
-    redisClient.hmset('Sections', {
-                        'javascript': 'AngularJS',
-                        'css': 'Bootstrap',
-                        'node': 'Express'
-                        });
-    */
-
-// lists : rpush or lpush
-/* client.rpush(['frameworks', 'angularjs', 'backbone'], function(err, reply) {
-    console.log(reply); //prints 2
-});
-
-// -1= get all
-client.lrange('frameworks', 0, -1, function(err, reply) {
-    console.log(reply); // ['angularjs', 'backbone']
-}); */
-
-//     redisClient.publish("message", "{\"message\":\"Hello from Redis\"}", function () {
-//     });
-
-//     res.send('תקשרתי עם רדיס....')
-// });
-
-// catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//     var err = new Error('Not Found');
-//     err.status = 404;
-//     next(err);
-// });
 
 };
 redisClient.on('connect', function () {
@@ -129,6 +80,5 @@ redisClient.on('connect', function () {
 server.listen(6062, function () {
     console.log('Sender is running on port 6062');
 });
-
 
 module.exports = Db2
