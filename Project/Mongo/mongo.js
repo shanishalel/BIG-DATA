@@ -1,6 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://shani:shani206134033@cluster0.phy1b.mongodb.net/Project?retryWrites=true&w=majority";
-
+const Json2csvParser = require('json2csv').Parser;
+const fs = require('fs');//to creat csv to bigml
 // sumHelper = function (numbers) {
 //     let total = 0;
 //     numbers.forEach(numberObject => {
@@ -63,5 +64,16 @@ var Db = {
 
     }
 };
+
+const csvFields = ['_id', 'Type', 'Section', 'CarType','Day','Time','IsSpecial'];
+const json2csvParser = new Json2csvParser({ csvFields });
+const csv = json2csvParser.parse(result);
+
+	console.log(csv);
+
+fs.writeFile('data.csv', csv, function(err) {
+    if (err) throw err;
+    console.log('file saved');
+});
 
 module.exports = Db
