@@ -9,8 +9,9 @@ redisClient.subscribe('message');
 
 let all_the_cars=new Map();
 
-let section_1=0,section_2=0,section_3=0,section_4=0,section_5=0;
-let number_of_cars=0;
+var cars=[]
+var section_1=0,section_2=0,section_3=0,section_4=0,section_5=0;
+var number_of_cars=0;
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -29,18 +30,17 @@ app.use(function(err, req, res, next) {
 });
 
 redisClient.on("message", function (channel, data) {
-    let car = JSON.parse(data);
+    let tmp = JSON.parse(data);
     
-    var cars=new Map();
-    cars.set("Type",car.Type);
-    cars.set("Section",car.Section);
-    cars.set("CarType",car.carType);
-    cars.set("Day", car.Day);
-    cars.set("Time",car.Time);
-    cars.set("IsSpecial",car.IsSpecial);
+    var car=new Map();
+    car.set("Type",tmp.Type);
+    car.set("Section",tmp.Section);
+    car.set("CarType",tmp.CarType);
+    car.set("Day", tmp.Day);
+    car.set("Time",tmp.Time);
+    car.set("IsSpecial",tmp.IsSpecial);
 
-    all_the_cars.set(number_of_cars,cars);
-    
+    all_the_cars.set(number_of_cars,car);
     number_of_cars++;
 
 
@@ -48,10 +48,17 @@ redisClient.on("message", function (channel, data) {
 
 
 exports.get_sections =(req,res,next) => {
+
     all_the_cars.forEach(car => {
-       
-    if(car.Type=="Enter Road" || car.Type=="Enter Section"){
-        switch(car.Section){
+
+        cars.push(
+            {Section : car.get("Section") ,Type:car.get('Type'),CarType:car.get('CarType'),
+            Day:car.get('Day'),Time:car.get('Time'),IsSpecial:car.get('IsSpecial') }
+        );
+
+        
+    if(car.get ('Type')=="Enter Road" || car.get ('Type')=="Enter Section"){
+        switch(car.get('Section')){
             case 1:
                 section_1++;
                 break;
@@ -74,8 +81,8 @@ exports.get_sections =(req,res,next) => {
     }
     /* at this point we can gets number<0 we should check it ans maybe 
     change the simulator */
-    if(car.Type=="End Road" || car.Type=="Exit road"){
-        switch(car.Section){
+    if(car.get ('Type')=="End Road" || car.get ('Type')=="Exit road"){
+        switch(car.get('Section')){
             case 1:
                 section_1--;
                 break;
@@ -98,14 +105,16 @@ exports.get_sections =(req,res,next) => {
 
     var number_cars=section_1+section_2+section_3+section_4+section_5;
     var cards=[
-        {section:"1",Number:section_1},
-        {section:"2",Number:section_2},
-        {section:"3",Number:section_3},
-        {section:"4",Number:section_4},
-        {section:"5",Number:section_5},
-        {section:"6",Number:number_cars}];
+        {section:"Section 1",Number:section_1},
+        {section:"Section 2",Number:section_2},
+        {section:"Section 3",Number:section_3},
+        {section:"Section 4",Number:section_4},
+        {section:"Section 5",Number:section_5},
+        {section:"Total cars : ",Number:number_cars}];
 
-    res.render('../RT_GUI/views/pages/index',{cards:cards});
+
+    res.render('../RT_GUI/views/pages/index',{cards:cards,cars:cars});
+    
 
 };
 
