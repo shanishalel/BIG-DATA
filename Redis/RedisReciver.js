@@ -40,33 +40,32 @@ redisClient.on("message", function (channel, data) {
     
     var single_car=new Map(); // create empty map(key-value) that contain the car deatails
     
-    single_car.set("Enter road",js_object.Enter_Road);
-    single_car.set("Exit road",js_object.Exit_Road);
-    single_car.set("Enter section",js_object.Enter_Section);
-    single_car.set("Exit section",js_object.Exit_Section);
-    single_car.set("Car type",js_object.Car_Type);
+    single_car.set("Type",js_object.Type);
+    single_car.set("Section",js_object.Section);
+    single_car.set("CarType",js_object.CarType);
     single_car.set("Day", js_object.Day);
     single_car.set("Time",js_object.Time);
-    single_car.set("Is special",js_object.Is_Special);
+    single_car.set("IsSpecial",js_object.IsSpecial);
 
-    // saves in all_the_cars hash map
-    all_the_cars.set(total_cars_number,single_car); // key- current number car, value- the map car
+    all_the_cars.set(total_cars_number,single_car);
     total_cars_number++;
-    console.log("Event has been inserted to Redis")   
+    console.log("Event has been inserted to Redis");   
+
 });
 
 
 exports.get_sections =(req,res,next) => {
     all_the_cars.forEach(car => {
 
-        cars.push({ 
-            Section : car.get("Section") ,
+        cars.push( {
+            Section : car.get("Section"),
             Type : car.get('Type'),
             CarType : car.get('CarType'),
             Day : car.get('Day'),
             Time : car.get('Time'),
-            IsSpecial: car.get('IsSpecial') }
-        );
+            IsSpecial : car.get('IsSpecial') 
+        });
+
 
         
     if(car.get ('Type')=="Enter Road" || car.get ('Type')=="Enter Section"){
@@ -93,7 +92,7 @@ exports.get_sections =(req,res,next) => {
     }
     /* at this point we can gets number<0 we should check it ans maybe 
     change the simulator */
-    if(car.get ('Type')=="End Road" || car.get ('Type')=="Exit road"){
+    if(car.get ('Type')=="Exit Section" || car.get ('Type')=="Exit road"){
         switch(car.get('Section')){
             case 1:
                 section_1--;
