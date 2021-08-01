@@ -97,7 +97,7 @@ var Db = {
                 if (err) 
                     throw err;
                 db.close();
-            var delay = 10000;
+            var delay = 20000;
             setTimeout(function(){
                 create_CSV(result)}, delay);
       });
