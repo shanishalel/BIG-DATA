@@ -1,12 +1,12 @@
 //https://www.npmjs.com/package/bigml
-connection = new bigml.BigML('SHIRELISR',
-                             '53bd09869add8361f9db8872ba6d0bae29021873',
-                             true)
-const mongo=require('../Mongo/mongo');
 
 var bigml = require('bigml');
+var connection = new bigml.BigML('SHIRELISR','53bd09869add8361f9db8872ba6d0bae29021873');
+const mongo=require('../Mongo/mongo');
+
 var source = new bigml.Source();
-source.create(mango.write_to_csv_mongoDB(), function(error, sourceInfo) {
+mongo.write_to_csv_mongoDB();
+source.create("csv_bigml.csv", function(error, sourceInfo) {
   if (!error && sourceInfo) {
     var dataset = new bigml.Dataset();
     dataset.create(sourceInfo, function(error, datasetInfo) {

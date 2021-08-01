@@ -10,6 +10,8 @@ const port = 3000
 const kafka_produce = require('./Kafka/kafkaProduce');
 const kafka_consume = require('./Kafka/kafkaConsume');
 
+const bigml=require('./BigML/bigml');
+
 const Router=require('./Routers/cards');
 
 const bodyParser = require('body-parser');

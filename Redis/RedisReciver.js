@@ -55,6 +55,9 @@ redisClient.on("message", function (channel, data) {
 
 
 exports.get_sections =(req,res,next) => {
+   
+    var section_1 = 0, section_2 = 0, section_3 = 0, section_4 = 0, section_5 = 0, total_cars_number = 0 ;
+
     all_the_cars.forEach(car => {
 
         cars.push( {
@@ -87,32 +90,31 @@ exports.get_sections =(req,res,next) => {
                 break;
             default:
         }
-        
-    
     }
     /* at this point we can gets number<0 we should check it ans maybe 
     change the simulator */
-    if(car.get ('Type')=="Exit Section" || car.get ('Type')=="Exit road"){
-        switch(car.get('Section')){
-            case 1:
-                section_1--;
-                break;
-            case 2:
-                section_2--;
-                break;
-            case 3:
-                section_3--;
-                break;
-            case 4:
-                section_4--;
-                break;
-            case 5:
-                section_5--;
-                break;
-            default:
-        }
+    // if(car.get ('Type')=="Exit Section" || car.get ('Type')=="Exit road"){
+    //     switch(car.get('Section')){
+    //         case 1:
+    //             section_1--;
+    //             break;
+    //         case 2:
+    //             section_2--;
+    //             break;
+    //         case 3:
+    //             section_3--;
+    //             break;
+    //         case 4:
+    //             section_4--;
+    //             break;
+    //         case 5:
+    //             section_5--;
+    //             break;
+    //         default:
+    //     }
 
-    }});
+    // }
+    });
 
     var number_cars=section_1+section_2+section_3+section_4+section_5;
     var cards=[
