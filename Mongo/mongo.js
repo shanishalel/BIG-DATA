@@ -5,7 +5,7 @@ const uri = "mongodb+srv://shani:shani206134033@cluster0.phy1b.mongodb.net/Proje
 // const fastcsv = require("fast-csv");
 // const fs = require("fs");//to creat csv
 // const ws = fs.createWriteStream("csv_bigml.csv");//npm install fast-csv
-//const csv = require("../BigML/create_CSV");
+const csv1 = require('./create_CSV');
 
 
 // sumHelper = function (numbers) {
@@ -99,7 +99,7 @@ var Db = {
                 db.close();
             var delay = 20000;
             setTimeout(function(){
-                create_CSV(result)}, delay);
+                csv1.create_csv_mango(result)}, delay);
       });
     }); 
  }} // End Db

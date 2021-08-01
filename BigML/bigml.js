@@ -2,10 +2,10 @@
 
 // var bigml = require('bigml');
 // var connection = new bigml.BigML('SHIRELISR','53bd09869add8361f9db8872ba6d0bae29021873');
- const mongo=require('../Mongo/mongo');
+ //const mongo=require('../Mongo/mongo');
 
 // var source = new bigml.Source();
-mongo.write_to_csv_mongoDB();
+//mongo.write_to_csv_mongoDB();
 // source.create("csv_bigml.csv", function(error, sourceInfo) {
 //   if (!error && sourceInfo) {
 //     var dataset = new bigml.Dataset();
