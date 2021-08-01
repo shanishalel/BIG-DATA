@@ -6,7 +6,7 @@ module.exports.DataMaker= function () {
         var event = {}; // event={} is an empty object 
         
         var type = ["Enter Section","Enter Road","Exit Section","Exit road"]
-        choose_section = Math.floor(Math.random() * 6) + 1; // Enter road from 1 to 5 
+        choose_section = Math.floor(Math.random() * 5) + 1; // Enter road from 1 to 5 
         event.Type = "Enter Road";
         event.Section = choose_section;
 
