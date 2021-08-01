@@ -1,8 +1,12 @@
 const kafkaProduce=require('../Kafka/kafkaProduce');
 
 
-module.exports.DataMaker= function () {
-    for (let i = 0; i < 10; i++) {
+module.exports.DataMaker=function(){
+    setInterval(my,1000); 
+};
+
+
+function my() {
         var event = {}; // event={} is an empty object 
         
         var type = ["Enter Section","Enter Road","Exit Section","Exit road"]
@@ -32,57 +36,47 @@ module.exports.DataMaker= function () {
         let bool = [true,false]
         event.IsSpecial = bool[location5];
 
+        // console.log(event);
         //publish to kafka by the publish function in kafkaProduce
         kafkaProduce.publish(event); // send the event to kafka producer
 
-        
-       
+        event.Type = "Enter Section";
+        // console.log(event);
+
+        kafkaProduce.publish(event); 
+
         // Enter Section = 0
         // Exit road = 1
          location1 = Math.floor(Math.random() * 2); // Returns a random integer from 0 to 1
         if(location1 == 0) {
-            while(location1!= 1) {  // Enter Section case
 
+            while(location1!= 1) {  // Enter Section case             
 
                 location2 = Math.floor(Math.random() * 2) ; // Returns a random integer from 0 to 1
                 if (location2 == 0) { // 0 is "before"
-                   if(event.Section == 1) {
-                       event.Type = "Enter Section";
-                       event.Section = 2;
-                       kafkaProduce.publish(event); 
-
-                       event.Type = "Exit Section";
-                       kafkaProduce.publish(event); 
-
-                   }
-                    else {
+                   if(event.Section != 1) {
                         event.Type = "Enter Section";
                         enter_section = event.Section - 1;
                         event.Section = enter_section;
+                        // console.log(event);
                         kafkaProduce.publish(event);
 
                         event.Type = "Exit Section";
+                        // console.log(event);
                         kafkaProduce.publish(event);      
                     }
                 }
                 else { // 1 is "after"
-                    if(event.Section == 5) {
-                        event.Type = "Enter Section";
-                        event.Section = 4;
-                        kafkaProduce.publish(event); 
-
-                        event.Type = "Exit Section";
-                        event.Section = 4;
-                        kafkaProduce.publish(event);    
-                    }
-
-                    else {
+                    if(event.Section != 5) {
+                         
                         event.Type = "Enter Section";
                         enter_section = event.Section + 1;
                         event.Section = enter_section;
+                        // console.log(event);
                         kafkaProduce.publish(event);
     
                         event.Type = "Exit Section";
+                        // console.log(event);
                         kafkaProduce.publish(event);
                     }  
                 }
@@ -90,19 +84,22 @@ module.exports.DataMaker= function () {
                 location1 = Math.floor(Math.random() * 2); // Returns a random integer from 0 to 1
                 if(location1 == 1) {
                     event.Type= "Exit road";  
+                    // console.log(event);
                     kafkaProduce.publish(event);
                 }
             }
         }
 
         else { // Exit road case in the first time
+            event.Type = "Exit Section";
+            //publish to kafka by the publish function in kafkaProduce
+            // console.log(event);
+            kafkaProduce.publish(event) // send the event to kafka producer
 
             event.Type = "Exit road";
-            event.Section = choose_section;
-
             //publish to kafka by the publish function in kafkaProduce
+            // console.log(event);
             kafkaProduce.publish(event) // send the event to kafka producer
      
         }
     }
-}

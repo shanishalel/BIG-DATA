@@ -1,7 +1,9 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://shani:shani206134033@cluster0.phy1b.mongodb.net/Project?retryWrites=true&w=majority";
-// const Json2csvParser = require('json2csv').Parser;
-// const fs = require('fs');//to creat csv to bigml
+const fastcsv = require("fast-csv");
+const fs = require("fs");//to creat csv
+const ws = fs.createWriteStream("csv_bigml.csv");//npm install fast-csv
+
 // sumHelper = function (numbers) {
 //     let total = 0;
 //     numbers.forEach(numberObject => {
@@ -31,7 +33,7 @@ var Db = {
                 if (err)
                     throw err;
                 else 
-                    console.log("Event has been inserted to mongoDB");
+                    // console.log("Event has been inserted to mongoDB");
                 db.close();
             });
         }); 
@@ -78,21 +80,27 @@ var Db = {
 
             });
         });
-    } // End 'ReadEvent'
+    } ,// End 'ReadEvent'
+
+
+    write_to_csv_mongoDB: function (renderTheView) {
+        MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, db) {
+            if (err)
+                throw err;
+            var dbo = db.db("Project"); // name of the DB
+            console.log(db);
+            fastcsv.write(db, { headers: true }).on("finish", function() {
+            console.log("Write to bezkoder_mongodb_fastcsv.csv successfully!");
+          }).pipe(ws);
+
+        client.close();
+      });
+
+    }
 
 }; // End Db
 
 
 
-// const csvFields = ['_id', 'Type', 'Section', 'CarType','Day','Time','IsSpecial'];
-// const json2csvParser = new Json2csvParser({ csvFields });
-// const csv = json2csvParser.parse(result);
-
-// console.log(csv);
-
-// fs.writeFile('data.csv', csv, function(err) {
-//     if (err) throw err;
-//     console.log('file saved');
-// });
 
 module.exports = Db // we can use Db in other files 
