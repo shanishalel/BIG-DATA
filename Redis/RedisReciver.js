@@ -49,7 +49,7 @@ redisClient.on("message", function (channel, data) {
 
     all_the_cars.set(total_cars_number,single_car);
     total_cars_number++;
-    console.log("Event has been inserted to Redis");   
+    // console.log("Event has been inserted to Redis");   
 
 });
 
@@ -58,7 +58,7 @@ exports.get_sections =(req,res,next) => {
     all_the_cars.forEach(car => {
 
         cars.push( {
-            Section : car.get("Section"),
+            Section : car.get('Section'),
             Type : car.get('Type'),
             CarType : car.get('CarType'),
             Day : car.get('Day'),

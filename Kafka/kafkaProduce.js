@@ -20,6 +20,20 @@ const kafkaConf = {
 const prefix = "urqvma33-";
 const topic = `${prefix}myTest`;
 
+// const kafkaConf = { 
+//   "group.id": "cloudkarafka-example",
+//   "metadata.broker.list": "glider-01.srvs.cloudkafka.com:9094,glider-02.srvs.cloudkafka.com:9094,glider-03.srvs.cloudkafka.com:9094".split(","),
+//   "socket.keepalive.enable": true,
+//   "security.protocol": "SASL_SSL",
+//   "sasl.mechanisms": "SCRAM-SHA-256",
+//   "sasl.username": "83ogo9vy",
+//   "sasl.password": "bC5z_v2mq409ZlPqxnrKDaJ3KRjq3ZPJ",
+//   "debug": "generic,broker,security"
+// };
+
+// const prefix = "83ogo9vy-";
+// const topic = `${prefix}myTest6`;
+
 
 // https://medium.com/@jonathanferreira23/how-to-implement-a-bulletproof-kafka-producer-consumer-cycle-with-nodejs-81c58dd79dd3 
 // Producer its a message producer (creating message), its the source of the data and from the producer we 
