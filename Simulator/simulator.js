@@ -43,29 +43,53 @@ module.exports.DataMaker= function () {
         if(location1 == 0) {
             while(location1!= 1) {  // Enter Section case
 
-                event.Type = "Enter Section";
- 
+
                 location2 = Math.floor(Math.random() * 2) ; // Returns a random integer from 0 to 1
                 if (location2 == 0) { // 0 is "before"
-                    enter_section = choose_section - 1;
-                    event.Section = enter_section;
-                    kafkaProduce.publish(event);
+                   if(event.Section == 1) {
+                       event.Type = "Enter Section";
+                       event.Section = 2;
+                       kafkaProduce.publish(event); 
 
-                    event.Type = "Exit Section";
-                    kafkaProduce.publish(event);      
+                       event.Type = "Exit Section";
+                       kafkaProduce.publish(event); 
+
+                   }
+                    else {
+                        event.Type = "Enter Section";
+                        enter_section = event.Section - 1;
+                        event.Section = enter_section;
+                        kafkaProduce.publish(event);
+
+                        event.Type = "Exit Section";
+                        kafkaProduce.publish(event);      
+                    }
                 }
                 else { // 1 is "after"
-                    enter_section = choose_section + 1;
-                    event.Section = enter_section;
-                    kafkaProduce.publish(event);
+                    if(event.Section == 5) {
+                        event.Type = "Enter Section";
+                        event.Section = 4;
+                        kafkaProduce.publish(event); 
 
-                    event.Type = "Exit Section";
-                    kafkaProduce.publish(event);
+                        event.Type = "Exit Section";
+                        event.Section = 4;
+                        kafkaProduce.publish(event);    
+                    }
+
+                    else {
+                        event.Type = "Enter Section";
+                        enter_section = event.Section + 1;
+                        event.Section = enter_section;
+                        kafkaProduce.publish(event);
+    
+                        event.Type = "Exit Section";
+                        kafkaProduce.publish(event);
+                    }  
                 }
 
                 location1 = Math.floor(Math.random() * 2); // Returns a random integer from 0 to 1
                 if(location1 == 1) {
-                    event.Type= "Exit road";
+                    event.Type= "Exit road";  
                     kafkaProduce.publish(event);
                 }
             }
@@ -75,11 +99,10 @@ module.exports.DataMaker= function () {
 
             event.Type = "Exit road";
             event.Section = choose_section;
-        }
 
-        
             //publish to kafka by the publish function in kafkaProduce
             kafkaProduce.publish(event) // send the event to kafka producer
      
+        }
     }
 }
