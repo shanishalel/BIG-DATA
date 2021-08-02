@@ -1,6 +1,5 @@
 //https://www.npmjs.com/package/bigml
 
-<<<<<<< HEAD
 var bigml = require('bigml');
 var connection = new bigml.BigML('shirelisr','53bd09869add8361f9db8872ba6d0bae29021873');
 const mongo=require('../Mongo/mongo');
@@ -22,7 +21,6 @@ source.create("csv_bigml.csv", function(error, sourceInfo) {
     });
   }
 });
-=======
 // var bigml = require('bigml');
 // var connection = new bigml.BigML('SHIRELISR','53bd09869add8361f9db8872ba6d0bae29021873');
  //const mongo=require('../Mongo/mongo');
@@ -45,4 +43,3 @@ source.create("csv_bigml.csv", function(error, sourceInfo) {
 //     });
 //   }
 // });
->>>>>>> d4d16ce2fbfbe0bcd988ba7e7693a7cb7395734d

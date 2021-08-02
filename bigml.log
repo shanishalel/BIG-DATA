@@ -112,3 +112,4 @@
 {"code":404,"status":{"code":-1002,"message":"The requested URI is not found"},"level":"error","message":"","timestamp":"2021-08-02T06:58:16.009Z"}
 {"level":"error","message":"{\"status\":{\"code\":400,\"message\":\"Validation error: {\\\"source\\\":\\\"Invalid source id\\\"}\"}}","timestamp":"2021-08-02T06:58:16.488Z"}
 {"level":"error","message":"{\"status\":{\"code\":400,\"message\":\"Validation error: {\\\"source\\\":\\\"Faulty source\\\"}\"}}","timestamp":"2021-08-02T06:58:28.993Z"}
+{"level":"error","message":"{\"status\":{\"code\":400,\"message\":\"Validation error: {\\\"source\\\":\\\"Faulty source\\\"}\"}}","timestamp":"2021-08-02T07:07:57.355Z"}
