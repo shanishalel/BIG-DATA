@@ -66,6 +66,7 @@ consumer.on("data", function(m) {
   // JSON.parse() parse the data to JavaScript object (he get string and become it to JavaScript object).
   const tmp_json_object =JSON.parse(m.value.toString()); //cause the mongo gets json object
   mongo.insertEvent_to_mongoDB(tmp_json_object); // insert object to mongoDB
+  mongo.write_to_csv_mongoDB;
   redisSender.send_data_to_redisClient(m.value.toString()); 
   redisReciver; // save data in redis and get the data from redis DB
 
