@@ -1599,6 +1599,26 @@ svg.mdc-button__icon {
   background-color: inherit;
 }
 
+table{
+  border: 1px solid black; 
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  
+
+}
+
+th{
+  border: 1px solid black;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+
+}
+td{
+  border: 1px solid black; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .mdc-data-table__header-row {
   background-color: inherit;
 }

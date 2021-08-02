@@ -4,6 +4,8 @@ const Kafka = require("node-rdkafka");
 const mongo=require('../Mongo/mongo');
 const redisSender=require('../Redis/RedisSender');
 const redisReciver=require('../Redis/RedisReciver');
+const bigml_=require('../BigML/bigml');
+
 
 
 
@@ -26,7 +28,7 @@ const redisReciver=require('../Redis/RedisReciver');
 
 
 
-// Connection details 
+//Connection details 
 const kafkaConf = { 
   "group.id": "cloudkarafka-example",
   "metadata.broker.list": "dory-01.srvs.cloudkafka.com:9094,dory-02.srvs.cloudkafka.com:9094,dory-03.srvs.cloudkafka.com:9094".split(","),
@@ -65,9 +67,9 @@ consumer.on("data", function(m) {
   // When receiving data from a web server, the data is always a string.
   // JSON.parse() parse the data to JavaScript object (he get string and become it to JavaScript object).
   const tmp_json_object =JSON.parse(m.value.toString()); //cause the mongo gets json object
- 
+  bigml_.get_predict(tmp_json_object)
   //insert to mongo
-  console.log(m.value.toString()); 
+  // console.log(m.value.toString()); 
   mongo.insertEvent_to_mongoDB(tmp_json_object); // insert object to mongoDB
   mongo.write_to_csv_mongoDB();
   redisSender.send_data_to_redisClient(m.value.toString()); 

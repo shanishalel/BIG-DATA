@@ -3,9 +3,7 @@
 
 
 const mongo = require("../Mongo/mongo");
-
-
-
+const bigml_=require('../BigML/bigml');
 
 
 // Imports
@@ -67,11 +65,12 @@ module.exports.publish = function(msg) {
   producer.produce(topic, -1, genMessage(m), uuid.v4());  //Send to KAFKA
   
   // //send the data to the mongoDB and write
-  // const tmp_json_object =JSON.parse(m); //cause the mongo gets json object
+  const tmp_json_object =JSON.parse(m); //cause the mongo gets json object
   
-  // console.log(m); 
-  // mongo.insertEvent_to_mongoDB(tmp_json_object); // insert object to mongoDB
-  // mongo.write_to_csv_mongoDB();
+  console.log(tmp_json_object); 
+  mongo.insertEvent_to_mongoDB(tmp_json_object); // insert object to mongoDB
+  mongo.write_to_csv_mongoDB();
+  bigml_.get_predict(tmp_json_object)
 
 
 

@@ -10,7 +10,7 @@ const port = 3000
 const kafka_produce = require('./Kafka/kafkaProduce');
 const kafka_consume = require('./Kafka/kafkaConsume');
 
-const bigml=require('./BigML/bigml');
+const BigMl=require('./BigML/bigml');
 
 const Router=require('./Routers/cards');
 
@@ -37,5 +37,7 @@ app.use(express.static('./RT_GUI/public'));
 app.set('view engine', 'ejs');
 
 app.get('/dashboard', (req, res) => {
-  res.render("./RT_GUI/views/pages/index.ejs",{cards:cards});
+  var mat=BigMl.Matrix
+  res.render("./RT_GUI/views/pages/index",{cards:cards,mat:mat});
+
 });

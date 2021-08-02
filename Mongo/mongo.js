@@ -38,7 +38,7 @@ var Db = {
                 if (err)
                     throw err;
                 else 
-                    console.log("Event has been inserted to mongoDB");
+                    // console.log("Event has been inserted to mongoDB");
                 db.close();
             });
         }); 
@@ -121,7 +121,7 @@ function create_CSV(data) {
     fs.writeFile("./csv_bigml.csv",csv_data,function(error){
         if(error)
             throw error;
-        console.log("Write to csv successfuly!");
+        // console.log("Write to csv successfuly!");
     });
 }
 

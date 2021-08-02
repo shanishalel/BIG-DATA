@@ -11,7 +11,6 @@ function my() {
         
         event.Type = "Enter Road";
 
-
         // Type of the car - private, truck, van 
         let car_types = ["Private", "Truck", "Van"]
         location3 = Math.floor(Math.random() * 3);
@@ -33,15 +32,21 @@ function my() {
         let bool = [true,false]
         event.IsSpecial = bool[location5];
 
+        choose_section = Math.floor(Math.random() * 5) + 1; // Enter road from 1 to 5 
+        event.enter_section=choose_section;
+        event.Section = choose_section;
+
+        
+
+
         // console.log(event);
         //publish to kafka by the publish function in kafkaProduce
         kafkaProduce.publish(event); // send the event to kafka producer
 
         event.Type = "Enter Section";
 
-        choose_section = Math.floor(Math.random() * 5) + 1; // Enter road from 1 to 5 
-        event.Section = choose_section;
-        event.enter_section=choose_section;
+        
+
 
         
         // console.log(event);

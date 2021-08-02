@@ -5,11 +5,12 @@ var app = require('express')();
 var server = require('http').Server(app);
 var redis = require('redis');
 
-
-
 var redisClient = redis.createClient();
 var sub = redis.createClient()
 redisClient.subscribe('message'); 
+const bigml_=require('../BigML/bigml');
+
+
 
 
 let all_the_cars=new Map();
@@ -70,9 +71,7 @@ exports.get_sections =(req,res,next) => {
             Section : car.get('Section')
 
         });
-
-
-        
+    
     if(car.get ('Type')=="Enter Road" || car.get ('Type')=="Enter Section"){
         switch(car.get('Section')){
             case 1:
@@ -93,29 +92,6 @@ exports.get_sections =(req,res,next) => {
             default:
         }
     }
-    /* at this point we can gets number<0 we should check it ans maybe 
-    change the simulator */
-    // if(car.get ('Type')=="Exit Section" || car.get ('Type')=="Exit road"){
-    //     switch(car.get('Section')){
-    //         case 1:
-    //             section_1--;
-    //             break;
-    //         case 2:
-    //             section_2--;
-    //             break;
-    //         case 3:
-    //             section_3--;
-    //             break;
-    //         case 4:
-    //             section_4--;
-    //             break;
-    //         case 5:
-    //             section_5--;
-    //             break;
-    //         default:
-    //     }
-
-    // }
     });
 
     var number_cars=section_1+section_2+section_3+section_4+section_5;
@@ -127,11 +103,14 @@ exports.get_sections =(req,res,next) => {
         {section:"Section 5",Number:section_5},
         {section:"Total cars : ",Number:number_cars}];
  
-    res.render('../RT_GUI/views/pages/index',{cards:cards,cars:cars}); 
-    const sections=[section_1,section_2,section_3,section_4,section_5];
-    module.exports =  { sections}
+
+    sections=[section_1,section_2,section_3,section_4,section_5];
+    var mat=bigml_.Matrix
+    res.render('../RT_GUI/views/pages/index',{cards:cards,cars:cars,sections:sections,mat:mat}); 
+    return sections;
     
 };
+
 
 
 redisClient.on('connect', function() {
@@ -143,3 +122,4 @@ server.listen(6061, function() {
 });
 
 
+// module.exports=get_sections

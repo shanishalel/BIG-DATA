@@ -1,4 +1,6 @@
-const {sections}=require('../../../Redis/RedisReciver')
+// const RedisReciver = require('../Redis/RedisReciver');
+// sections=RedisReciver.sections
+
 (function($) {
     'use strict'; 
     $(function() {
@@ -6,13 +8,13 @@ const {sections}=require('../../../Redis/RedisReciver')
     //Revenue Chart
     if ($("#revenue-chart").length) {
         var revenueChartCanvas = $("#revenue-chart").get(0).getContext("2d");
-
+        // var sections=RedisReciver.get_sections()
         var revenueChart = new Chart(revenueChartCanvas, {
             type: 'bar',
             data: {
             labels: ["Section 1", "Section 2", "Section 3", "Section 4", "Section 5"],
             datasets: [{
-                data: [ sections[0], 300, 500, '<%= cards.section %>', '<%= cards.section %>'],
+                data: [ 100, 300, 500, 8, 7, 8],
                 backgroundColor: ["rgba(255, 86, 48, 0.3)", "rgba(255, 86, 48, 0.3)", "rgba(255, 86, 48, 0.3)", "rgb(255, 86, 48)", "rgba(255, 86, 48, 0.3)", "rgba(255, 86, 48, 0.3)", "rgba(255, 86, 48, 0.3)"],
                 }
             ]
