@@ -5,7 +5,7 @@ const uri = "mongodb+srv://shani:shani206134033@cluster0.phy1b.mongodb.net/Proje
 // const fastcsv = require("fast-csv");
 // const fs = require("fs");//to creat csv
 // const ws = fs.createWriteStream("csv_bigml.csv");//npm install fast-csv
-//const csv = require("../BigML/create_CSV");
+// const create_CSV = require('../BigML/create_CSV.js');
 
 
 // sumHelper = function (numbers) {
@@ -98,11 +98,26 @@ var Db = {
                     throw err;
                 db.close();
             var delay = 20000;
-            setTimeout(function(){
-                create_CSV(result)}, delay);
+            setTimeout(function(){create_CSV(result)}
+                , delay);
       });
     }); 
  }} // End Db
+
+
+const Json2_CSV = require("json2csv").Parser;
+const fs = require("fs");
+const ws = fs.createWriteStream("csv_bigml.csv");
+
+function create_CSV(data) {
+    const json2_csv = new Json2_CSV({ header : true });
+    const csv_data = json2_csv.parse(data);
+    fs.writeFile("csv_bigml.csv",csv_data,function(error){
+        if(error)
+            throw error;
+        console.log("Write to csv successfuly!");
+    });
+}
 
 
 module.exports = Db // we can use Db in other files 
