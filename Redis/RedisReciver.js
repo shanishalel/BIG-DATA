@@ -6,6 +6,7 @@ var server = require('http').Server(app);
 var redis = require('redis');
 
 
+
 var redisClient = redis.createClient();
 var sub = redis.createClient()
 redisClient.subscribe('message'); 
@@ -125,8 +126,11 @@ exports.get_sections =(req,res,next) => {
         {section:"Section 4",Number:section_4},
         {section:"Section 5",Number:section_5},
         {section:"Total cars : ",Number:number_cars}];
-
+ 
     res.render('../RT_GUI/views/pages/index',{cards:cards,cars:cars}); 
+    const sections=[section_1,section_2,section_3,section_4,section_5];
+    module.exports =  { sections}
+    
 };
 
 

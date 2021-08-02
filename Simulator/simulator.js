@@ -1,6 +1,5 @@
 const kafkaProduce=require('../Kafka/kafkaProduce');
 
-
 module.exports.DataMaker=function(){
     setInterval(my,1000); 
 };
@@ -9,10 +8,8 @@ module.exports.DataMaker=function(){
 function my() {
         var event = {}; // event={} is an empty object 
         
-        var type = ["Enter Section","Enter Road","Exit Section","Exit road"]
-        choose_section = Math.floor(Math.random() * 5) + 1; // Enter road from 1 to 5 
+        
         event.Type = "Enter Road";
-        event.Section = choose_section;
 
 
         // Type of the car - private, truck, van 
@@ -41,9 +38,18 @@ function my() {
         kafkaProduce.publish(event); // send the event to kafka producer
 
         event.Type = "Enter Section";
+
+        choose_section = Math.floor(Math.random() * 5) + 1; // Enter road from 1 to 5 
+        event.Section = choose_section;
+        event.enter_section=choose_section;
+
+        
         // console.log(event);
 
+        
+
         kafkaProduce.publish(event); 
+
 
         // Enter Section = 0
         // Exit road = 1

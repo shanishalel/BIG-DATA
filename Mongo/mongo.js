@@ -38,7 +38,7 @@ var Db = {
                 if (err)
                     throw err;
                 else 
-                    // console.log("Event has been inserted to mongoDB");
+                    console.log("Event has been inserted to mongoDB");
                 db.close();
             });
         }); 
@@ -94,15 +94,19 @@ var Db = {
                 throw err;
                 // {projection: {IsSpecial:0 }}
             var dbo = db.db("Project");
-            dbo.collection("RoadDB").find({}).toArray(function(err, result) {
-                if (err) 
-                    throw err;
-                db.close();
-            var delay = 20000;
-            setTimeout(function(){create_CSV(result)}
-                , delay);
+            dbo.collection("RoadDB").find()
+            .toArray()
+            .then(products => {
+                create_CSV(products);
+              return products;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+    //         setTimeout(function(){create_CSV(result)}
+    //             , delay);
 
-      });
+    //   });
     }); 
  }} // End Db
 
@@ -124,14 +128,4 @@ function create_CSV(data) {
 
 module.exports = Db // we can use Db in other files 
 
-    
-
-
-// _dbo.collection("cars").find()
-//           .toArray()
-//           .then(products => {
-//             return products;
-//           })
-//           .catch(err => {
-//             console.log(err);
-//           });
+// _dbo.collection("cars")
