@@ -26,7 +26,7 @@ const topic = `${prefix}myTest6`;
 
 
 
-// //Connection details 
+// Connection details 
 // const kafkaConf = { 
 //   "group.id": "cloudkarafka-example",
 //   "metadata.broker.list": "dory-01.srvs.cloudkafka.com:9094,dory-02.srvs.cloudkafka.com:9094,dory-03.srvs.cloudkafka.com:9094".split(","),
@@ -65,6 +65,8 @@ consumer.on("data", function(m) {
   // When receiving data from a web server, the data is always a string.
   // JSON.parse() parse the data to JavaScript object (he get string and become it to JavaScript object).
   const tmp_json_object =JSON.parse(m.value.toString()); //cause the mongo gets json object
+  
+  console.log(m.value.toString()); 
   mongo.insertEvent_to_mongoDB(tmp_json_object); // insert object to mongoDB
   mongo.write_to_csv_mongoDB();
   redisSender.send_data_to_redisClient(m.value.toString()); 
@@ -73,10 +75,10 @@ consumer.on("data", function(m) {
 });
 
 
-// print to the console the data that the consume got from the produce
-consumer.on("data", function(m) {
-  console.log(m.value.toString()); 
-});
+// // print to the console the data that the consume got from the produce
+// consumer.on("data", function(m) {
+//   console.log(m.value.toString()); 
+// });
 
 consumer.on("disconnected", function(arg) {
   process.exit();

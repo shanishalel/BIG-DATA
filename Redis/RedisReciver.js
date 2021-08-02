@@ -16,7 +16,6 @@ var cars=[]
 var section_1 = 0, section_2 = 0, section_3 = 0, section_4 = 0, section_5 = 0, total_cars_number = 0 ;
 
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -41,11 +40,12 @@ redisClient.on("message", function (channel, data) {
     var single_car=new Map(); // create empty map(key-value) that contain the car deatails
     
     single_car.set("Type",js_object.Type);
-    single_car.set("Section",js_object.Section);
     single_car.set("CarType",js_object.CarType);
     single_car.set("Day", js_object.Day);
     single_car.set("Time",js_object.Time);
     single_car.set("IsSpecial",js_object.IsSpecial);
+    single_car.set("Section",js_object.Section);
+
 
     all_the_cars.set(total_cars_number,single_car);
     total_cars_number++;
@@ -61,12 +61,13 @@ exports.get_sections =(req,res,next) => {
     all_the_cars.forEach(car => {
 
         cars.push( {
-            Section : car.get('Section'),
             Type : car.get('Type'),
             CarType : car.get('CarType'),
             Day : car.get('Day'),
             Time : car.get('Time'),
-            IsSpecial : car.get('IsSpecial') 
+            IsSpecial : car.get('IsSpecial'),
+            Section : car.get('Section')
+
         });
 
 

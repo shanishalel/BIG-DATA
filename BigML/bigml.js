@@ -5,7 +5,7 @@ var connection = new bigml.BigML('shanishalel89','8056af838b08e085892d94250e1724
 // const mongo=require('../Mongo/mongo');
 
 var source = new bigml.Source(connection);
-source.create('../csv_bigml.csv', function(error, sourceInfo) {
+source.create("./csv_bigml.csv", function(error, sourceInfo) {
   if (!error && sourceInfo) {
     var dataset = new bigml.Dataset();
     dataset.create(sourceInfo, function(error, datasetInfo) {
@@ -15,12 +15,19 @@ source.create('../csv_bigml.csv', function(error, sourceInfo) {
           if (!error && modelInfo) {
             var prediction = new bigml.Prediction();
             prediction.create(modelInfo, {"":""})
+
           }
         });
       }
     });
   }
 });
+
+// var localModel = new bigml.LocalModel('model/6107b37bc1c0000b93093e13');
+// localModel.predict({"":""},
+//                        function(error, prediction) {console.log(prediction)});
+
+
 
 
 
