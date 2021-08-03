@@ -32,6 +32,7 @@ The first is responsible for storing the data within the DB while the second is 
 In the end, all the data is displayed on an HTML web page that shows the end result of the project.
 
 
+![‏‏צילום מסך (216)](https://user-images.githubusercontent.com/57362284/127979586-5fc80760-d401-42a4-a083-8a08aa9041ce.png)
 
 
 
