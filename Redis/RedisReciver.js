@@ -107,7 +107,6 @@ exports.get_sections =(req,res,next) => {
     sections=[section_1,section_2,section_3,section_4,section_5];
     var mat=bigml_.Matrix
     res.render('../RT_GUI/views/pages/index',{cards:cards,cars:cars,sections:sections,mat:mat}); 
-    return sections;
     
 };
 

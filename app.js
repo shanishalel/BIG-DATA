@@ -37,7 +37,7 @@ app.use(express.static('./RT_GUI/public'));
 app.set('view engine', 'ejs');
 
 app.get('/dashboard', (req, res) => {
-  var mat=BigMl.Matrix
-  res.render("./RT_GUI/views/pages/index",{cards:cards,mat:mat});
+  // var mat=BigMl.Matrix
+  res.render("./RT_GUI/views/pages/index",{cards:cards});
 
 });
