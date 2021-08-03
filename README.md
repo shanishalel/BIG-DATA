@@ -40,4 +40,9 @@ The first is responsible for storing the data within the DB while the second is 
 ![‏‏צילום מסך (216)](https://user-images.githubusercontent.com/57362284/127979586-5fc80760-d401-42a4-a083-8a08aa9041ce.png)
 
 
+###Gif that show the site 
+![20210803_115758](https://user-images.githubusercontent.com/57361588/127989103-2e894a71-965d-4aff-ab8a-fad56fdd9a47.gif)
+
+
+
 
