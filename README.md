@@ -12,6 +12,7 @@ We have created a simulator that grills the following data-
 * Time
 * Special-day(e.g Holiday)
 * Section
+  
 Each event is delivered directly to kafka produce who is responsible for routing the events to the appropriate Topic.
 kafka consume transmits the events received from kafka produce to each of the DBs detailed below.
 
