@@ -2,23 +2,7 @@
 // Imports
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://shani:shani206134033@cluster0.phy1b.mongodb.net/Project?retryWrites=true&w=majority";
-// const fastcsv = require("fast-csv");
-// const fs = require("fs");//to creat csv
-// const ws = fs.createWriteStream("csv_bigml.csv");//npm install fast-csv
-// const create_CSV = require('../BigML/create_CSV.js');
-// const csv1 = require('./create_CSV');
 
-
-// sumHelper = function (numbers) {
-//     let total = 0;
-//     numbers.forEach(numberObject => {
-//         let n = parseInt(numberObject.quantity);
-//         if (n)
-//             total += n;
-//     });
-   
-//     return total;
-// }
 
 
 var Db = {

@@ -11,35 +11,37 @@ const uuid = require("uuid");
 const Kafka = require("node-rdkafka");
 const simulator = require('../Simulator/simulator');
 const { Db } = require("mongodb");
+const redisSender=require('../Redis/RedisSender');
 
 
-// Connection details 
-const kafkaConf = { 
-  "group.id": "cloudkarafka-example",
-  "metadata.broker.list": "dory-01.srvs.cloudkafka.com:9094,dory-02.srvs.cloudkafka.com:9094,dory-03.srvs.cloudkafka.com:9094".split(","),
-  "socket.keepalive.enable": true,
-  "security.protocol": "SASL_SSL",
-  "sasl.mechanisms": "SCRAM-SHA-256",
-  "sasl.username": "urqvma33",
-  "sasl.password": "Vn6M6VlC2XS-oK7zL3QpdEHqse_S6KmU",
-  "debug": "generic,broker,security"
-};
-const prefix = "urqvma33-";
-const topic = `${prefix}myTest`;
 
+// // Connection details 
 // const kafkaConf = { 
 //   "group.id": "cloudkarafka-example",
-//   "metadata.broker.list": "glider-01.srvs.cloudkafka.com:9094,glider-02.srvs.cloudkafka.com:9094,glider-03.srvs.cloudkafka.com:9094".split(","),
+//   "metadata.broker.list": "dory-01.srvs.cloudkafka.com:9094,dory-02.srvs.cloudkafka.com:9094,dory-03.srvs.cloudkafka.com:9094".split(","),
 //   "socket.keepalive.enable": true,
 //   "security.protocol": "SASL_SSL",
 //   "sasl.mechanisms": "SCRAM-SHA-256",
-//   "sasl.username": "83ogo9vy",
-//   "sasl.password": "bC5z_v2mq409ZlPqxnrKDaJ3KRjq3ZPJ",
+//   "sasl.username": "urqvma33",
+//   "sasl.password": "Vn6M6VlC2XS-oK7zL3QpdEHqse_S6KmU",
 //   "debug": "generic,broker,security"
 // };
+// const prefix = "urqvma33-";
+// const topic = `${prefix}myTest`;
 
-// const prefix = "83ogo9vy-";
-// const topic = `${prefix}myTest6`;
+const kafkaConf = { 
+  "group.id": "cloudkarafka-example",
+  "metadata.broker.list": "glider-01.srvs.cloudkafka.com:9094,glider-02.srvs.cloudkafka.com:9094,glider-03.srvs.cloudkafka.com:9094".split(","),
+  "socket.keepalive.enable": true,
+  "security.protocol": "SASL_SSL",
+  "sasl.mechanisms": "SCRAM-SHA-256",
+  "sasl.username": "83ogo9vy",
+  "sasl.password": "bC5z_v2mq409ZlPqxnrKDaJ3KRjq3ZPJ",
+  "debug": "generic,broker,security"
+};
+
+const prefix = "83ogo9vy-";
+const topic = `${prefix}myTest6`;
 
 
 // https://medium.com/@jonathanferreira23/how-to-implement-a-bulletproof-kafka-producer-consumer-cycle-with-nodejs-81c58dd79dd3 
@@ -64,14 +66,15 @@ module.exports.publish = function(msg) {
   m = JSON.stringify(msg); // JSON.stringify(some object) method converts a JavaScript object to JSON string
   producer.produce(topic, -1, genMessage(m), uuid.v4());  //Send to KAFKA
   
-  // //send the data to the mongoDB and write
+  // // //send the data to the mongoDB and write
   const tmp_json_object =JSON.parse(m); //cause the mongo gets json object
   
   console.log(tmp_json_object); 
   mongo.insertEvent_to_mongoDB(tmp_json_object); // insert object to mongoDB
   mongo.write_to_csv_mongoDB();
-  bigml_.get_predict(tmp_json_object)
-
+  bigml_.get_predict(tmp_json_object);
+  redisSender.send_data_to_redisClient(m); 
+  // redisReciver; 
 
 
   //producer.disconnect();   

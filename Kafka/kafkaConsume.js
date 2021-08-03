@@ -7,41 +7,38 @@ const redisReciver=require('../Redis/RedisReciver');
 const bigml_=require('../BigML/bigml');
 
 
-
-
-
-// const kafkaConf = { 
-//   "group.id": "cloudkarafka-example",
-//   "metadata.broker.list": "glider-01.srvs.cloudkafka.com:9094,glider-02.srvs.cloudkafka.com:9094,glider-03.srvs.cloudkafka.com:9094".split(","),
-//   "socket.keepalive.enable": true,
-//   "security.protocol": "SASL_SSL",
-//   "sasl.mechanisms": "SCRAM-SHA-256",
-//   "sasl.username": "83ogo9vy",
-//   "sasl.password": "bC5z_v2mq409ZlPqxnrKDaJ3KRjq3ZPJ",
-//   "debug": "generic,broker,security"
-// };
-
-// const prefix = "83ogo9vy-";
-// const topic = `${prefix}myTest6`;
-
-
-
-
-
-//Connection details 
 const kafkaConf = { 
   "group.id": "cloudkarafka-example",
-  "metadata.broker.list": "dory-01.srvs.cloudkafka.com:9094,dory-02.srvs.cloudkafka.com:9094,dory-03.srvs.cloudkafka.com:9094".split(","),
+  "metadata.broker.list": "glider-01.srvs.cloudkafka.com:9094,glider-02.srvs.cloudkafka.com:9094,glider-03.srvs.cloudkafka.com:9094".split(","),
   "socket.keepalive.enable": true,
   "security.protocol": "SASL_SSL",
   "sasl.mechanisms": "SCRAM-SHA-256",
-  "sasl.username": "urqvma33",
-  "sasl.password": "Vn6M6VlC2XS-oK7zL3QpdEHqse_S6KmU",
+  "sasl.username": "83ogo9vy",
+  "sasl.password": "bC5z_v2mq409ZlPqxnrKDaJ3KRjq3ZPJ",
   "debug": "generic,broker,security"
 };
 
-const prefix = "urqvma33-";
-const topic = `${prefix}myTest`;
+const prefix = "83ogo9vy-";
+const topic = `${prefix}myTest6`;
+
+
+
+
+
+// //Connection details 
+// const kafkaConf = { 
+//   "group.id": "cloudkarafka-example",
+//   "metadata.broker.list": "dory-01.srvs.cloudkafka.com:9094,dory-02.srvs.cloudkafka.com:9094,dory-03.srvs.cloudkafka.com:9094".split(","),
+//   "socket.keepalive.enable": true,
+//   "security.protocol": "SASL_SSL",
+//   "sasl.mechanisms": "SCRAM-SHA-256",
+//   "sasl.username": "urqvma33",
+//   "sasl.password": "Vn6M6VlC2XS-oK7zL3QpdEHqse_S6KmU",
+//   "debug": "generic,broker,security"
+// };
+
+// const prefix = "urqvma33-";
+// const topic = `${prefix}myTest`;
 
 
 
@@ -69,7 +66,7 @@ consumer.on("data", function(m) {
   const tmp_json_object =JSON.parse(m.value.toString()); //cause the mongo gets json object
   bigml_.get_predict(tmp_json_object)
   //insert to mongo
-  // console.log(m.value.toString()); 
+  console.log(m.value.toString()); 
   mongo.insertEvent_to_mongoDB(tmp_json_object); // insert object to mongoDB
   mongo.write_to_csv_mongoDB();
   redisSender.send_data_to_redisClient(m.value.toString()); 

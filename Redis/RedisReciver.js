@@ -46,6 +46,7 @@ redisClient.on("message", function (channel, data) {
     single_car.set("Day", js_object.Day);
     single_car.set("Time",js_object.Time);
     single_car.set("IsSpecial",js_object.IsSpecial);
+    single_car.set("enter_section",js_object.enter_section);
     single_car.set("Section",js_object.Section);
 
 
@@ -68,7 +69,9 @@ exports.get_sections =(req,res,next) => {
             Day : car.get('Day'),
             Time : car.get('Time'),
             IsSpecial : car.get('IsSpecial'),
+            enter_section:car.get('enter_section'),
             Section : car.get('Section')
+
 
         });
     
