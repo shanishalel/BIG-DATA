@@ -28,12 +28,9 @@ The first is responsible for storing the data within the DB while the second is 
 
 In the end, all the data is displayed on an HTML web page that shows the end result of the project:  
 <img src = "https://user-images.githubusercontent.com/57362284/127986870-cf6cdeca-c190-4d45-94ff-245cc680bb6a.jpeg" width="650"> 
-![טבלאות](https://user-images.githubusercontent.com/57362284/127987054-a9ef7831-2770-4cbc-9777-5e74cc191afb.jpeg)  
-![ביג](https://user-images.githubusercontent.com/57362284/127987127-467abb7d-ae77-46d7-b4dc-92c8c068ea0e.jpeg)  
+<img src = "https://user-images.githubusercontent.com/57362284/127987054-a9ef7831-2770-4cbc-9777-5e74cc191afb.jpeg" width="650"> 
+<img src = "https://user-images.githubusercontent.com/57362284/127987127-467abb7d-ae77-46d7-b4dc-92c8c068ea0e.jpeg" width="650">  
   
-
-
-
 
 
 ### Diagram showing technological mapping of the system:
