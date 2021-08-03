@@ -1,6 +1,6 @@
 # BIG-DATA PROJECT
 
-This is a project in a BigData course at Ariel University, the project was written by Shani Shalal, Yarden Cohen and Shirel Israelov.
+This is a project in a BigData course at Ariel University, the project was written by Shani Shalel, Yarden Cohen and Shirel Israelov.
 
 In this project we shows the traffic in all the 5 sections of road 6.  
 In each section we count the number of cars it has, additionally we created a prediction model that based on previous data it learned, the model predicte the exit section of new cars.
