@@ -1,4 +1,4 @@
-# BIG-DATA
+# BIG-DATA PROJECT
 
 This is a project in a BigData course at Ariel University, the project was written by Shani Shalal, Yarden Cohen and Shirel Israelov.
 
