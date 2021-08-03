@@ -2,8 +2,8 @@
 
 This is a project in a BigData course at Ariel University, the project was written by Shani Shalal, Yarden Cohen and Shirel Israelov.
 
-In the project we simulate an entrance simulator for the exit to road 6, where the road is divided into 5 sections.
-In each section we count the number of cars it has and for each car we find a function that predicts in which section it came out.
+In this project we shows the traffic in all the 5 sections of road 6.  
+In each section we count the number of cars it has, additionally we created a prediction model that based on previous data it learned,the model predicte the exit section of new cars.
 
 We have created a simulator that grills the following data- 
 * Type (enter/exit from road, enter/exit section)
@@ -14,13 +14,11 @@ We have created a simulator that grills the following data-
 * Section
   
 Each event is delivered directly to kafka produce who is responsible for routing the events to the appropriate Topic.
-kafka consume transmits the events received from kafka produce to each of the DBs detailed below.
+Kafka consume transmits the events received from kafka produce to each of the DBs detailed below.
 
-We use the MangoDB-Atlas database to store the car record, while saving the data: event type(enter/exit from road, enter/exit section),
-Car Type (private/van/truck), event day,  event time, IsSpecial-thaet present if it is a special-day(e.g Holiday) 
-and section-represents the section number to which the car is located ,and we use this data to predic in BigMl.
+We use MangoDB-Atlas DB to store cars data that specified above (Type (enter/exit from road, enter/exit section), Car Type (private/van/truck) ,Day, Time, Special-day(e.g Holiday) and Section), we use this data to make the prediction in BigMl.
 
-We use BigMl to predic which section of a given car will be exit , in the gevin data car-type, is-spaecial day,day, event type,which sectuon did he enter,
+We use BigMl to predic which section of a given car will be exit , in a given data car-type, is-spaecial day, day, event type, which sectuon did he enter,
 and  which section he is in the givrn time.
 We create confusion matrix that count the Predicting successes against actual cars exits.
  
