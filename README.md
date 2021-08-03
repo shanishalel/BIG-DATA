@@ -3,14 +3,14 @@
 This is a project in a BigData course at Ariel University, the project was written by Shani Shalal, Yarden Cohen and Shirel Israelov.
 
 In this project we shows the traffic in all the 5 sections of road 6.  
-In each section we count the number of cars it has, additionally we created a prediction model that based on previous data it learned,the model predicte the exit section of new cars.
+In each section we count the number of cars it has, additionally we created a prediction model that based on previous data it learned, the model predicte the exit section of new cars.
 
 We have created a simulator that grills the following data- 
 * Type (enter/exit from road, enter/exit section)
 * Car Type (private/van/truck)
 * Day
 * Time
-* Special-day(e.g Holiday)
+* Special-day (e.g Holiday)
 * Section
 * Enter section
   
