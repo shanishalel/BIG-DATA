@@ -14,15 +14,15 @@ We have created a simulator that grills the following data-
 * Section
 * Enter section
   
-Each event is delivered directly to kafka produce who is responsible for routing the events to the appropriate Topic.
+Each event is delivered directly to kafka produce who is responsible for routing the events to the appropriate Topic.  
 Kafka consume transmits the events received from kafka produce to each of the DBs detailed below.
 
 We use MangoDB-Atlas DB to store cars data that specified above (Type (enter/exit from road, enter/exit section), Car Type (private/van/truck) ,Day, Time, Special-day(e.g Holiday) and Section), we use this data to make the prediction in BigMl.
 
-In a given data car-type, is-spaecial day, day, event type, enter section and time we use BigMl to predic which section of a given car will be exit.
+In a given data car-type, is-spaecial day, day, event type, enter section and time we use BigMl to predic which section of a given car will be exit.  
 We create confusion matrix that count the Predicting successes against actual cars exits.
  
-We used Redis DB to store the events, this DB use to present the numbers of cars in each section in the dashboard.
+We used Redis DB to store the events, this DB use to present the numbers of cars in each section in the dashboard.  
 The Redis divided into two class- 
 The first is responsible for storing the data within the DB while the second is responsible for retrieving the information which we displayed this data in real time.
 
